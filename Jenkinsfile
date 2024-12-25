@@ -1,7 +1,9 @@
 pipeline {
     agent any
      environment {
-        registry = "314146334258.dkr.ecr.us-east-1.amazonaws.com/ques/5"
+         AWS_ACCESS_KEY_ID = AKIAUSJEUUYZLIMRCV5Z
+         AWS_SECRET_ACCESS_KEY = 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 
+         registry = "314146334258.dkr.ecr.us-east-1.amazonaws.com/ques/5"
     }
    
     stages {
