@@ -1,19 +1,21 @@
-# this is my base image
-FROM alpine:3.5
+# Use a base image with Python and Alpine
+FROM python:3.8-alpine
 
-# Install python and pip
-RUN apk add --update py2-pip
+# Install necessary system dependencies
+RUN apk update && apk add --no-cache ca-certificates
 
-# install Python modules needed by the Python app
+# Install Python pip (make sure it's updated)
+RUN pip install --upgrade pip
+
+# Install Python dependencies from requirements.txt
 COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+RUN pip install --no-cache-dir --trusted-host pypi.org --trusted-host pypi.python.org -r /usr/src/app/requirements.txt
 
-# copy files required for the app to run
-COPY app.py /usr/src/app/
-COPY templates/index.html /usr/src/app/templates/
+# Copy application code
+COPY . /usr/src/app/
 
-# tell the port number the container should expose
+# Expose the necessary port
 EXPOSE 5000
 
-# run the application
+# Run the application
 CMD ["python", "/usr/src/app/app.py"]
