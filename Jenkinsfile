@@ -25,7 +25,7 @@ pipeline {
                   script {
                
      sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 314146334258.dkr.ecr.us-east-1.amazonaws.com'
-     sh 'docker push 314146334258.dkr.ecr.us-east-1.amazonaws.com/ques/5:chandu'                  
+     sh 'docker push 314146334258.dkr.ecr.us-east-1.amazonaws.com/ques/5:latest'                  
               
 
           }
@@ -40,7 +40,7 @@ pipeline {
             stage('Docker Run') {
               steps{
                    script {
-                sh 'docker run -d -p 8096:5000 --rm --name mypythonContainer 314146334258.dkr.ecr.us-east-1.amazonaws.com/ques/5:chandu'     
+                sh 'docker run -d -p 8096:5000 --rm --name mypythonContainer 314146334258.dkr.ecr.us-east-1.amazonaws.com/ques/5:latest'     
       }
     }
         }
